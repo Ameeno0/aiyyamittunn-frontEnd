@@ -1,0 +1,62 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <td>
+              <h4 class="card-title">Items List</h4>
+              <p class="card-category">Here is a list of Items</p>
+            </td>
+            <td align="end" *ngIf="currentUser">
+              <button mat-icon-button (click)="openDialog()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </td>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <th>No</th>
+                  <th>Type</th>
+                  <th>No of Items</th>
+                  <th>Description</th>
+                  <th *ngIf="currentUser">Edit</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of items; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.noi }}</td>
+                    <td>{{ item.description }}</td>
+                    <td
+                      *ngIf="
+                        currentUser &&
+                        ['admin', 'coordinator'].includes(currentUser.type)
+                      "
+                    >
+                      <button
+                        mat-icon-button
+                        color="primary"
+                        (click)="openDialog('edit', item._id)"
+                      >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <mat-paginator
+                [length]="total"
+                [pageSize]="count"
+                (page)="pageEvent = handlePage($event)"
+              >
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

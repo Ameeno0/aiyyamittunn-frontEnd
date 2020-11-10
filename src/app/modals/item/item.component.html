@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>{{ data.type == 'new' ? 'Add' : 'Edit' }} Item</h2>
+<mat-dialog-content class="mat-typography">
+  <div>
+    <mat-form-field>
+      <mat-select [(ngModel)]="type" placeholder="Select Type">
+        <mat-option value="FOOD">Food</mat-option>
+        <mat-option value="CLOTHES">Clothes</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+        matInput
+        [(ngModel)]="description"
+        placeholder="Description"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="Enter Number of Items"
+        [(ngModel)]="noi"
+      />
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    [mat-dialog-close]="closeDialogue"
+    cdkFocusInitial
+    (click)="save()"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

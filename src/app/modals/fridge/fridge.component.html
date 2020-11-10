@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>Add Fridge</h2>
+<mat-dialog-content class="mat-typography">
+  <div>
+    <tr>
+      <td>
+        <google-map
+          height="300px"
+          width="700px"
+          [zoom]="zoom"
+          [center]="center"
+          [options]="options"
+          (mapClick)="click($event)"
+        >
+          <button (click)="zoomIn()">Zoom in</button>
+          <button (click)="zoomOut()">Zoom out</button>
+        </google-map>
+
+        <!-- <mat-form-field>
+          <input
+            matInput
+            type="number"
+            placeholder="Enter Latitude"
+            [(ngModel)]="lat"
+          />
+        </mat-form-field> -->
+      </td>
+      <td></td>
+      <!-- <td>
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            placeholder="Enter Longitude"
+            [(ngModel)]="lon"
+          />
+        </mat-form-field>
+      </td> -->
+    </tr>
+    <mat-form-field>
+      <textarea
+        matInput
+        [(ngModel)]="address"
+        placeholder="Enter Address"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [(ngModel)]="type" placeholder="Select Coordinator">
+        <mat-option
+          *ngFor="let coordinator of coordinators"
+          value="coordinator.pkid"
+          >{{ coordinator.userName }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    [mat-dialog-close]="closeDialogue"
+    cdkFocusInitial
+    (click)="save()"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

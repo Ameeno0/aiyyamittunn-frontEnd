@@ -1,0 +1,72 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <td>
+              <h4 class="card-title">Fridge List</h4>
+              <p class="card-category">Here is a list of fridges</p>
+            </td>
+          </div>
+          <div class="container">
+            <google-map
+              height="200px"
+              width="100%"
+              [zoom]="zoom"
+              [center]="center"
+              [options]="options"
+              (mapClick)="click($event)"
+            >
+              <map-marker
+                #markerElem
+                *ngFor="let marker of markers"
+                [position]="marker.position"
+                [label]="marker.label"
+                [title]="marker.title"
+                [options]="marker.options"
+                (mapClick)="openInfo(markerElem, marker.info)"
+              >
+              </map-marker>
+            </google-map>
+          </div>
+          <div class="card-body">
+            <div>
+              <mat-card class="example-card" *ngFor="let fridge of fridges">
+                <mat-card-content>
+                  <tr>
+                    <td>Address</td>
+                    <td>: {{ fridge.address }}</td>
+                  </tr>
+                  <tr>
+                    <td>Distance</td>
+                    <td>: {{ fridge.distance.toFixed(0) }} meters</td>
+                  </tr>
+                  <tr>
+                    <td>Coordinator</td>
+                    <td>: {{ fridge.coordinator[0].userName }}</td>
+                  </tr>
+                  <tr>
+                    <td>Mobile</td>
+                    <td>: {{ fridge.coordinator[0].mobile }}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <a
+                        class="nav-link"
+                        href="javascript:void(0)"
+                        (click)="items(fridge._id)"
+                        >See Available Items</a
+                      >
+                    </td>
+                  </tr>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

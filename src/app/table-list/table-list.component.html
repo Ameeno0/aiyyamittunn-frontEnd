@@ -1,0 +1,63 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <td>
+              <h4 class="card-title">Fridge List</h4>
+              <p class="card-category">Here is a list of fridges</p>
+            </td>
+            <td align="end" *ngIf="currentUser && currentUser.type === 'admin'">
+              <button mat-icon-button (click)="openDialog()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </td>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <th>No</th>
+                  <th>ID</th>
+                  <th>Address</th>
+                  <th>Coordinator</th>
+                  <th>Mobile</th>
+                  <th>Distance</th>
+                  <th>View Items</th>
+                </thead>
+                <tbody *ngIf="fridges">
+                  <tr *ngFor="let fridge of fridges; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ fridge._id }}</td>
+                    <td>{{ fridge.address }}</td>
+                    <td>{{ fridge.coordinator[0].userName }}</td>
+                    <td>{{ fridge.coordinator[0].mobile }}</td>
+                    <td>{{ fridge.distance.toFixed(1) }}m</td>
+                    <td class="text-primary">
+                      <button
+                        mat-button
+                        type="button"
+                        (click)="items(fridge._id)"
+                      >
+                        Show Items
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <mat-paginator
+                [length]="total"
+                [pageSize]="count"
+                (page)="pageEvent = handlePage($event)"
+              >
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
+  <!-- <google-map></google-map> -->
+</div>
